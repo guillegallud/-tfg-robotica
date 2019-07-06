@@ -11,4 +11,4 @@ con autismo. Seguidamente, se revisan los conceptos básicos de las tecnologías
 un estudio sobre las posibilidades que brinda el robot Pepper y sobre cómo aplicar el Deep
 Learning a detectar caras y clasificar emociones.
  
-        -------- El modelo del clasificador de emociones se encuentra en la pestaña "release" ----------
+    ----- El modelo del clasificador de emociones se encuentra en la pestaña "release" del repositorio -----
