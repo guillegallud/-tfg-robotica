@@ -1,0 +1,116 @@
+<html>
+
+	<head>
+
+		<title>Bootstrap Example</title>
+
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<script src="libqi-js/libs/qimessaging/2/qimessaging.js"></script>
+		<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+
+		<script type="text/javascript">
+
+			var timeOutGlobal = 10;
+			var timeOutCurrent = 10;
+
+
+			function sendToPython(text) {
+			  ALTabletBinding.raiseEvent(text);
+			};
+
+			function resetCounter() {
+				timeOutCurrent = timeOutGlobal;
+			};
+
+			function setTimeOutGlobal(time) {
+				timeOutGlobal = time;
+			};
+
+			function updateTimer() {
+				timeOutCurrent-=1;
+
+				var counter_tag = document.getElementById('counter');
+				counter_tag.innerHTML = timeOutCurrent;
+
+
+				if (timeOutCurrent <= 0) {
+					timeOutCurrent=1;
+					//eleccion por defecto
+					sendToPython('finishedPage:indexAB:A');
+					//estaria enviando el evento cada dos por tres?????
+				}
+			};
+
+			function click_button(selection) {
+
+				if (selection == 'a_selected') {
+					//res_tag.innerHTML = 'has hecho click en el boton izquierdo';
+					sendToPython('finishedPage:indexAB:A');
+
+				} else if(selection == 'b_selected') {
+					//res_tag.innerHTML = 'has hecho click en el boton derecho';
+					sendToPython('finishedPage:indexAB:B');
+				}
+
+				resetCounter();
+			};
+
+			function cleanExit() {
+				sendToPython('exit:true');
+			};
+
+		</script>
+
+
+
+
+	</head>
+
+	<body onload="setInterval(updateTimer, 1000)">
+
+	 <div id="imagen" style="position: relative; width:40%; height:75%;
+	 												 float:left;
+													 /* background-color: #222;*/">
+		 <!-- http://css-workshop.com/css-center-textimagediv-in-middle-of-parent-div-container/ -->
+		 <!-- &nbsp; -->
+
+			<img src="../images/tv_girl.jpg"
+					 style="width:100%; position: absolute; top: 50%; left: 50%;
+					 				transform: translate(-50%, -50%);"
+					 alt="Monotrón">
+			</img>
+
+	 </div>
+
+	 <div id="texto" style="width:60%; height:75%; float:left; background-color: #663300;">&nbsp;
+
+		  <p style="text-align:justify;margin-left:2em; margin-right:2em; font-size:1.7em; color: #FFFFFF;">
+
+								Eso decía el anuncio que Lucía acababa de ver en la tele.
+								A Lucía le llamó la atención el juguete.
+								¿Debería Lucía comprarse un Monotrón?
+		  </p>
+
+	 </div>
+
+	 <div style="width:25%; height:25%; float:left; background-color: #999;">
+
+		 <p style="position: relative; float: left; top: 40%; left: 50%;
+		 					 transform: translate(-50%, -50%);" id="counter">Counter
+		 </p>
+
+	 </div>
+
+	 <button id="button_a" onclick="click_button('a_selected')" style="width:25%; height:25%; float:left;">Sí</button>
+	 <button id="button_b" onclick="click_button('b_selected')" style="width:25%; height:25%; float:left;">No</button>
+
+	 <button onclick="cleanExit()" style="width:25%; height:25%; float:left;">Salir</button>
+
+
+
+
+	</body>
+
+</html>

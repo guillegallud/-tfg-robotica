@@ -1,0 +1,99 @@
+<html>
+
+	<head>
+
+		<title>Bootstrap Example</title>
+
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<script src="libqi-js/libs/qimessaging/2/qimessaging.js"></script>
+		<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+
+		<script type="text/javascript">
+
+			var timeOutGlobal = 20;
+			var timeOutCurrent = 20;
+
+
+			function sendToPython(text) {
+			  ALTabletBinding.raiseEvent(text);
+			};
+
+			function resetCounter() {
+				timeOutCurrent = timeOutGlobal;
+			};
+
+			function setTimeOutGlobal(time) {
+				timeOutGlobal = time;
+			};
+
+			function updateTimer() {
+				timeOutCurrent-=1;
+
+				var counter_tag = document.getElementById('counter');
+				counter_tag.innerHTML = timeOutCurrent;
+
+
+				if (timeOutCurrent <= 0) {
+
+					timeOutCurrent=1;
+					sendToPython('finishedPage:indexA');
+
+				}
+			};
+
+
+			function cleanExit() {
+				sendToPython('exit:true');
+			};
+
+		</script>
+
+
+
+
+	</head>
+
+	<body onload="setInterval(updateTimer, 1000)">
+
+	 <div id="imagen" style="position: relative; width:40%; height:75%;
+	 												 float:left;
+													 /* background-color: #222;*/">
+		 <!-- http://css-workshop.com/css-center-textimagediv-in-middle-of-parent-div-container/ -->
+		 <!-- &nbsp; -->
+
+			<img src="../images/future.jpg"
+					 style="width:100%; position: absolute; top: 50%; left: 50%;
+					 				transform: translate(-50%, -50%);"
+					 alt="Monotrón">
+			</img>
+
+	 </div>
+
+	 <div id="texto" style="width:60%; height:75%; float:left; background-color: #663300;">&nbsp;
+
+		  <p style="text-align:justify;margin-left:2em; margin-right:2em; font-size:1.7em; color:#FFFFFF">
+
+								Robotrón hizo un largo viaje hasta 2019 para hacerse pasar por juguete para
+								cumplir una misión secreta muy importante
+		  </p>
+
+	 </div>
+
+	 <div style="width:50%; height:25%; float:left; background-color: #999;">
+
+		 <p style="position: relative; float: left; top: 40%; left: 50%;
+		 					 transform: translate(-50%, -50%);" id="counter">Counter
+		 </p>
+
+	 </div>
+
+	 <button onclick="cleanExit()" style="width:50%; height:25%; float:left;">Salir</button>
+
+	 <!-- <div style="clear:both;">&nbsp;</div> -->
+
+
+	</body>
+
+</html>
